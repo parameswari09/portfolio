@@ -247,7 +247,6 @@ body {
         transform: scaleX(1);
     }
 }
-
 .technical-bars .bar .progress-line span {
     height: 100%;
     background-color: #0ef;
@@ -258,65 +257,92 @@ body {
     transform-origin: left;
 }
 
+/* Skill Percentages */
 .progress-line.html span {
     width: 80%;
 }
 
 .progress-line.css span {
-    width: 60%;
+    width: 70%;
 }
 
 .progress-line.javascript span {
-    width: 55%;
+    width: 65%;
 }
 
-.progress-line.bootstrap span {
-    width: 30%;
+.progress-line.php span {
+    width: 60%;
+}
+
+.progress-line.mysql span {
+    width: 60%;
 }
 
 .progress-line.python span {
-    width: 40%;
+    width: 70%;
 }
-.progress-line span::after{
-   position: absolute;
-   padding:1px 8px;
-   background-color: #000;
-   color:#fff;
-   font-size: 12px;
-   top:-28px;
-   right: -20px;
-   animation: showText 0.5s 1.5s linear forwards;
-   opacity: 0;
+
+.progress-line.c span {
+    width: 65%;
 }
-.progress-line.html span::after{
+
+/* Percentage Text */
+.progress-line span::after {
+    position: absolute;
+    padding: 1px 8px;
+    background-color: #000;
+    color: #fff;
+    font-size: 12px;
+    top: -28px;
+    right: -20px;
+    animation: showText 0.5s 1.5s linear forwards;
+    opacity: 0;
+}
+
+.progress-line.html span::after {
     content: "80%";
 }
-.progress-line.css span::after{
+
+.progress-line.css span::after {
+    content: "70%";
+}
+
+.progress-line.javascript span::after {
+    content: "65%";
+}
+
+.progress-line.php span::after {
     content: "60%";
 }
-.progress-line.javascript span::after{
-    content: "55%";
+
+.progress-line.mysql span::after {
+    content: "60%";
 }
-.progress-line.bootstrap span::after{
-    content: "30%";
+
+.progress-line.python span::after {
+    content: "70%";
 }
-.progress-line.python span::after{
-    content: "40%";
+
+.progress-line.c span::after {
+    content: "65%";
 }
-.progress-line span::before{
+
+/* Arrow */
+.progress-line span::before {
     content: "";
     position: absolute;
     width: 0;
     height: 0;
-    border:7px solid transparent;
-    border-bottom-width: 0px;
-    border-right-width: 0px;
-    border-top-color:#000 ;
-    top:-10px;
+    border: 7px solid transparent;
+    border-bottom-width: 0;
+    border-right-width: 0;
+    border-top-color: #000;
+    top: -10px;
     right: 0;
     animation: showText 0.5s 1.5s linear forwards;
     opacity: 0;
 }
+
 .education {
     padding: 50px;
     background: #081b29;
@@ -594,7 +620,10 @@ box-shadow: 0 0 20px #0ef;
     padding: 10px;
     border-radius: 0.5rem;
 }
-
+@media (min-width: 768px) 
+{ .container 
+    { width: 80%; font-size: 16px; }
+ }
 
 
 
@@ -647,4 +676,30 @@ box-shadow: 0 0 20px #0ef;
         transform: translateY(0px);
         opacity: 1;
     }
+
+}
+.resume-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.resume-img {
+    width: 70%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px #0ef;
+}
+
+.close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 35px;
+    color: #fff;
+    cursor: pointer;
 }
