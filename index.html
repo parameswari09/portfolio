@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parameswari | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    /* ====== OS WINDOW — Blue/White Theme Match ====== */
+    .os-window {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow:
+        0 0 0 1px rgba(37,99,235,0.1),
+        0 24px 60px rgba(37,99,235,0.12),
+        0 8px 24px rgba(0,0,0,0.07);
+      overflow: hidden;
+      width: 100%;
+      max-width: 520px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .os-titlebar {
+      background: #f8faff;
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      user-select: none;
+    }
+
+    .os-dots { display: flex; gap: 7px; }
+    .os-dot { width: 11px; height: 11px; border-radius: 50%; cursor: pointer; transition: opacity 0.2s; }
+    .os-dot:hover { opacity: 0.75; }
+    .os-dot.red    { background: #ff5f57; }
+    .os-dot.yellow { background: #febc2e; }
+    .os-dot.green  { background: #28c840; }
+
+    .os-title-text {
+      flex: 1; text-align: center;
+      font-size: 11.5px; font-weight: 600;
+      color: #64748b; letter-spacing: 0.4px;
+    }
+
+    .os-slide-counter {
+      font-size: 11px; color: #94a3b8;
+      font-weight: 600; min-width: 32px; text-align: right;
+    }
+
+    .os-viewport { overflow: hidden; position: relative; }
+    .os-track { display: flex; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
+    .os-slide { min-width: 100%; display: flex; flex-direction: column; }
+
+    /* Banner — blue gradient family */
+    .os-slide-banner {
+      height: 185px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .os-banner-1 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%); }
+    .os-banner-2 { background: linear-gradient(135deg, #1e40af 0%, #4f46e5 60%, #7c3aed 100%); }
+    .os-banner-3 { background: linear-gradient(135deg, #0369a1 0%, #0284c7 60%, #38bdf8 100%); }
+
+    .os-progress-bar { height: 3px; background: #e2e8f0; position: relative; overflow: hidden; }
+    .os-progress-fill {
+      position: absolute; top: 0; left: 0; height: 100%;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      transition: width 0.1s linear; border-radius: 0 2px 2px 0;
+    }
+
+    .os-slide-body { padding: 18px 22px 20px; background: #ffffff; }
+
+    .os-slide-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+    .os-tag { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.3px; }
+    .os-tag.t-blue   { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
+    .os-tag.t-purple { background: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe; }
+    .os-tag.t-green  { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+    .os-tag.t-red    { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+    .os-tag.t-orange { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
+
+    .os-slide-title { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
+    .os-slide-desc { font-size: 12.5px; color: #475569; line-height: 1.65; margin-bottom: 12px; }
+
+    .os-slide-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 12px; border-top: 1px solid #f1f5f9;
+    }
+    .os-date { font-size: 11px; color: #94a3b8; display: flex; align-items: center; gap: 5px; }
+    .os-badge { background: #dbeafe; border: 1px solid #bfdbfe; color: #1d4ed8; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; }
+
+    .os-nav {
+      display: flex; gap: 8px; align-items: center;
+      padding: 10px 16px; background: #f8faff;
+      border-top: 1px solid #e2e8f0; justify-content: space-between;
+    }
+    .os-arrow {
+      width: 30px; height: 30px; background: #eff6ff;
+      border: 1px solid #bfdbfe; border-radius: 8px;
+      color: #2563eb; font-size: 13px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease;
+    }
+    .os-arrow:hover { background: #2563eb; border-color: #2563eb; color: white; }
+
+    .os-indicator-dots { display: flex; gap: 6px; }
+    .os-ind-dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: all 0.3s ease; }
+    .os-ind-dot.active { background: #2563eb; width: 18px; border-radius: 3px; }
+
+    /* ===== ILLUSTRATION STYLES (white on blue banners) ===== */
+    .ill-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr;
+      gap: 5px; width: 110px; height: 70px; position: relative; z-index: 2;
+    }
+    .ill-block { background: rgba(255,255,255,0.18); border-radius: 6px; }
+    .ill-block.b1 { background: rgba(255,255,255,0.35); }
+    .ill-block.b2 { background: rgba(255,255,255,0.12); }
+    .ill-block.b3 { background: rgba(255,255,255,0.28); }
+    .ill-block.b4 { background: rgba(255,255,255,0.10); }
+    .ill-chain { display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; background:rgba(255,255,255,0.2); border-radius:6px; }
+    .ill-shield { display:flex; align-items:center; justify-content:center; color:#bfdbfe; font-size:16px; background:rgba(255,255,255,0.15); border-radius:6px; }
+
+    .ill-weapon-wrap { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+    .ill-camera-big { position:absolute; top:20px; left:30px; color:rgba(255,255,255,0.9); font-size:28px; }
+    .ill-scan-h-big {
+      position:absolute; left:0; right:0; height:2px;
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+      animation: scanBig 2.5s ease-in-out infinite;
+    }
+    @keyframes scanBig { 0%,100%{top:20%;opacity:0.9;} 50%{top:75%;} }
+    .ill-target-big { position:absolute; right:30px; bottom:20px; }
+    .ill-target-ring-big { border:2px solid rgba(255,255,255,0.35); border-radius:50%; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); }
+    .r1b { width:34px; height:34px; }
+    .r2b { width:52px; height:52px; border-color:rgba(255,255,255,0.18); }
+    .ill-cross { color:#fff; font-size:18px; position:relative; z-index:1; }
+    .glow-orange { position:absolute; width:100px; height:100px; background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%); bottom:-20px; right:-20px; border-radius:50%; pointer-events:none; }
+
+    .ill-traffic-wrap { display:flex; align-items:center; gap:14px; position:relative; z-index:2; padding:0 16px; }
+    .ill-sign-group-big { display:flex; gap:10px; align-items:center; }
+    .ill-sign-circle-big { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+    .red-big { background:#ef4444; }
+    .blue-big { background:rgba(255,255,255,0.25); border:2px solid rgba(255,255,255,0.5); border-radius:10px; }
+    .tri-big { width:48px; height:48px; background:#fde68a; clip-path:polygon(50% 0%,0% 100%,100% 100%); display:flex; align-items:center; justify-content:center; font-size:20px; }
+    .ill-classified { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:5px 12px; border-radius:10px; font-size:11px; font-weight:700; white-space:nowrap; }
+    .glow-green { position:absolute; width:100px; height:100px; background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%); top:-20px; left:-20px; border-radius:50%; pointer-events:none; }
+
+    .pf-orbit-big { position:absolute; width:160px; height:160px; border-radius:50%; border:1px dashed rgba(255,255,255,0.2); animation:spin 14s linear infinite; }
+    .pf-orbit-dot-big { position:absolute; width:10px; height:10px; background:rgba(255,255,255,0.6); border-radius:50%; }
+    .od1b { top:-5px; left:calc(50% - 5px); }
+    .od2b { bottom:-5px; right:calc(50% - 5px); background:rgba(255,255,255,0.4); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes arrowPulse { 0%,100% { transform: translateX(0); opacity: 0.4; } 50% { transform: translateX(5px); opacity: 0.8; } }
+
+    @media(max-width:900px) { .os-window { max-width: 100%; } }
+    .menu-toggle {
+  display: none;
+}
+  </style>
+</head>
+<body id="top">
+
+<header class="navbar">
+  <div class="nav-logo">Parameswari<span>.S</span></div>
+  <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+  <nav id="nav-links">
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero-new">
+  <div class="hero-left">
+    <h1>Hi there,<br>I'm <span class="typing">Parameswari</span></h1>
+    <p class="hero-subtitle">Web &amp; Backend Developer crafting scalable and efficient solutions</p>
+    <div class="hero-buttons">
+      <a href="#skills" class="btn-primary">View Skills</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-projects-label">
+      <span class="dot-accent"></span> My Projects
+    </div>
+
+    <div class="os-window">
+      <div class="os-titlebar">
+        <div class="os-dots">
+          <span class="os-dot red"></span>
+          <span class="os-dot yellow"></span>
+          <span class="os-dot green"></span>
+        </div>
+        <span class="os-title-text" id="osTitleText">ChainFort — Blockchain · PQC</span>
+        <span class="os-slide-counter" id="osCounter">1 / 3</span>
+      </div>
+
+      <div class="os-viewport">
+        <div class="os-track" id="osTrack">
+
+          <!-- Slide 1 -->
+          <div class="os-slide">
+            <div class="os-slide-banner os-banner-1">
+              <div class="pf-orbit-big">
+                <div class="pf-orbit-dot-big od1b"></div>
+                <div class="pf-orbit-dot-big od2b"></div>
+              </div>
+              <div class="ill-grid">
+                <div class="ill-block b1"></div>
+                <div class="ill-block b2"></div>
+                <div class="ill-chain"><i class="fas fa-link"></i></div>
+                <div class="ill-block b3"></div>
+                <div class="ill-block b4"></div>
+                <div class="ill-shield"><i class="fas fa-shield-alt"></i></div>
+              </div>
+            </div>
+            <div class="os-progress-bar"><div class="os-progress-fill"></div></div>
+            <div class="os-slide-body">
+              <div class="os-slide-tags">
+                <span class="os-tag t-blue">Blockchain</span>
+                <span class="os-tag t-purple">PQC</span>
+                <span class="os-tag t-green">Federated Learning</span>
+              </div>
+              <div class="os-slide-title">ChainFort</div>
+              <div class="os-slide-desc">Hybrid Blockchain-Orchestrated Firmware Validation and Secure Update Delivery Using Post-Quantum Cryptography &amp; Federated Trust Consensus.</div>
+              <div class="os-slide-footer">
+                <span class="os-date"><i class="fas fa-calendar-alt"></i> Dec 2025 – Mar 2026</span>
+                <span class="os-badge">⭐ Latest</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="os-slide">
+            <div class="os-slide-banner os-banner-2">
+              <div class="ill-weapon-wrap">
+                <span class="ill-camera-big"><i class="fas fa-camera"></i></span>
+                <div class="ill-scan-h-big"></div>
+                <div class="ill-target-big">
+                  <div class="ill-target-ring-big r1b"></div>
+                  <div class="ill-target-ring-big r2b"></div>
+                  <i class="fas fa-crosshairs ill-cross"></i>
+                </div>
+                <div class="glow-orange"></div>
+              </div>
+            </div>
+            <div class="os-progress-bar"><div class="os-progress-fill"></div></div>
+            <div class="os-slide-body">
+              <div class="os-slide-tags">
+                <span class="os-tag t-red">Computer Vision</span>
+                <span class="os-tag t-purple">Deep Learning</span>
+                <span class="os-tag t-blue">CNN</span>
+              </div>
+              <div class="os-slide-title">Weapon Detector</div>
+              <div class="os-slide-desc">Real-time weapon detection using convolutional neural networks to identify and flag dangerous objects in surveillance footage with high accuracy.</div>
+              <div class="os-slide-footer">
+                <span class="os-date"><i class="fas fa-calendar-alt"></i> Feb 2025 – May 2025</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="os-slide">
+            <div class="os-slide-banner os-banner-3">
+              <div class="glow-green"></div>
+              <div class="ill-traffic-wrap">
+                <div class="ill-sign-group-big">
+                  <div class="ill-sign-circle-big red-big">STOP</div>
+                  <div class="ill-sign-circle-big blue-big">60</div>
+                  <div class="tri-big">⚠</div>
+                </div>
+                <i class="fas fa-arrow-right" style="color:rgba(255,255,255,0.4);font-size:18px;animation:arrowPulse 1.5s ease-in-out infinite;"></i>
+                <div class="ill-classified">Classified ✓</div>
+              </div>
+            </div>
+            <div class="os-progress-bar"><div class="os-progress-fill"></div></div>
+            <div class="os-slide-body">
+              <div class="os-slide-tags">
+                <span class="os-tag t-blue">Neural Networks</span>
+                <span class="os-tag t-purple">Image Classification</span>
+                <span class="os-tag t-orange">AI</span>
+              </div>
+              <div class="os-slide-title">Traffic Sign AI</div>
+              <div class="os-slide-desc">Intelligent recognition and classification of traffic signs from real-world images using deep learning, contributing to autonomous driving safety.</div>
+              <div class="os-slide-footer">
+                <span class="os-date"><i class="fas fa-calendar-alt"></i> Jan 2024 – Mar 2024</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="os-nav">
+        <button class="os-arrow" onclick="osChange(-1)">&#8592;</button>
+        <div class="os-indicator-dots">
+          <span class="os-ind-dot active" onclick="osGo(0)"></span>
+          <span class="os-ind-dot" onclick="osGo(1)"></span>
+          <span class="os-ind-dot" onclick="osGo(2)"></span>
+        </div>
+        <button class="os-arrow" onclick="osChange(1)">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="about-new section-to-animate">
+  <div class="about-right"><img src="2.png" alt="Parameswari S."></div>
+  <div class="about-left">
+    <h4>ABOUT ME</h4>
+    <h2>Professional Overview</h2>
+    <p>I am <strong>Parameswari S.</strong>, a dedicated Backend Developer and M.E. CSE graduate. I design and develop scalable, high-performance web applications using modern backend technologies. I thrive on solving complex problems, continuously learning, and delivering clean, maintainable solutions. Collaborating with teams motivates me, and I enjoy transforming challenges into efficient and elegant outcomes.</p>
+    <a href="https://drive.google.com/file/d/1MFRiaxNdW9i9mISuWKG0KEJtg_4MOa7-/view?usp=sharing" class="btn-resume" target="_blank">Resume</a>
+  </div>
+</section>
+
+<!-- ================= EXPERIENCE ================= -->
+<section id="experience" class="experience-new section-to-animate">
+  <span class="section-tag">MY JOURNEY</span>
+  <h2>Experience &amp; Training</h2>
+  <div class="exp-showcase">
+    <div class="exp-card-main">
+      <div class="exp-card-header">
+        <div class="exp-company-logo"><i class="fas fa-laptop-code"></i></div>
+        <div class="exp-status-badge"><span class="pulse-dot"></span> Currently Working</div>
+      </div>
+      <div class="exp-card-body">
+        <div class="exp-role-block">
+          <h3>Backend Developer Trainee</h3>
+          <h4>Softdigi Empower Solutions</h4>
+          <span class="exp-duration"><i class="fas fa-calendar-alt"></i> 2025 – Present</span>
+        </div>
+        <div class="exp-divider"></div>
+        <div class="exp-highlights">
+          <div class="exp-highlight-item">
+            <div class="exp-highlight-icon"><i class="fas fa-code"></i></div>
+            <div><h5>Hands-on Development</h5><p>Gaining practical experience in backend technologies and real-world application development.</p></div>
+          </div>
+          <div class="exp-highlight-item">
+            <div class="exp-highlight-icon"><i class="fas fa-project-diagram"></i></div>
+            <div><h5>Real-time Projects</h5><p>Working on live projects to strengthen problem-solving and software development skills.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-card-footer">
+        <span class="exp-tag">PHP</span><span class="exp-tag">MySQL</span>
+        <span class="exp-tag">JavaScript</span><span class="exp-tag">Web Development</span>
+      </div>
+    </div>
+    <div class="exp-side-panel">
+      <div class="exp-stat"><div class="exp-stat-icon"><i class="fas fa-fire"></i></div><h3>Active</h3><p>Training</p></div>
+      <div class="exp-stat"><div class="exp-stat-icon"><i class="fas fa-tasks"></i></div><h3>Live</h3><p>Projects</p></div>
+      <div class="exp-stat"><div class="exp-stat-icon"><i class="fas fa-graduation-cap"></i></div><h3>M.E</h3><p>CSE Graduate</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education" class="education-new section-to-animate">
+  <span class="section-tag">EDUCATION</span>
+  <h2>Academic Foundation</h2>
+  <div class="edu-grid">
+    <div class="edu-card-new"><div class="edu-icon">🎓</div><h3>M.E CSE</h3><p>Sri Sairam Engineering College</p><span class="date">2024 - 2026</span><p>CGPA: 9.53 / 10</p></div>
+    <div class="edu-card-new"><div class="edu-icon">🏫</div><h3>B.E CSE</h3><p>Dhanalakshmi Srinivasan College</p><span class="date">2020 - 2024</span><p>CGPA: 8.66 / 10</p></div>
+    <div class="edu-card-new"><div class="edu-icon">📘</div><h3>HSC</h3><p>Aruna Matric Higher Secondary School</p><span class="date">2019 - 2020</span><p>Percentage: 76%</p></div>
+    <div class="edu-card-new"><div class="edu-icon">📘</div><h3>SSLC</h3><p>V.S Matric Higher Secondary School</p><span class="date">2017 - 2018</span><p>Percentage: 85%</p></div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="skills-new section-to-animate">
+  <span class="section-tag">EXPERTISE</span>
+  <h2>Technical Skills</h2>
+  <div class="skills-grid-new">
+    <div class="skill-card"><div class="skill-card-inner"><div class="skill-icon-wrap" style="--clr:#e34c26;"><i class="fab fa-html5"></i></div><div class="skill-info"><h4>HTML5</h4><p>Semantic Markup</p></div><div class="skill-level"><div class="skill-bar"><div class="skill-fill" style="width:90%;--clr:#e34c26;"></div></div><span>90%</span></div></div><div class="skill-glow" style="--clr:#e34c2620;"></div></div>
+    <div class="skill-card"><div class="skill-card-inner"><div class="skill-icon-wrap" style="--clr:#264de4;"><i class="fab fa-css3-alt"></i></div><div class="skill-info"><h4>CSS3</h4><p>Styling &amp; Layouts</p></div><div class="skill-level"><div class="skill-bar"><div class="skill-fill" style="width:85%;--clr:#264de4;"></div></div><span>85%</span></div></div><div class="skill-glow" style="--clr:#264de420;"></div></div>
+    <div class="skill-card"><div class="skill-card-inner"><div class="skill-icon-wrap" style="--clr:#f7df1e;"><i class="fab fa-js" style="color:#0f172a;"></i></div><div class="skill-info"><h4>JavaScript</h4><p>Dynamic Web</p></div><div class="skill-level"><div class="skill-bar"><div class="skill-fill" style="width:75%;--clr:#f7df1e;"></div></div><span>75%</span></div></div><div class="skill-glow" style="--clr:#f7df1e20;"></div></div>
+    <div class="skill-card"><div class="skill-card-inner"><div class="skill-icon-wrap" style="--clr:#777bb4;"><i class="fab fa-php"></i></div><div class="skill-info"><h4>PHP</h4><p>Server-side Logic</p></div><div class="skill-level"><div class="skill-bar"><div class="skill-fill" style="width:70%;--clr:#777bb4;"></div></div><span>70%</span></div></div><div class="skill-glow" style="--clr:#777bb420;"></div></div>
+    <div class="skill-card"><div class="skill-card-inner"><div class="skill-icon-wrap" style="--clr:#00758f;"><i class="fas fa-database"></i></div><div class="skill-info"><h4>MySQL</h4><p>Database Design</p></div><div class="skill-level"><div class="skill-bar"><div class="skill-fill" style="width:80%;--clr:#00758f;"></div></div><span>80%</span></div></div><div class="skill-glow" style="--clr:#00758f20;"></div></div>
+    <div class="skill-card"><div class="skill-card-inner"><div class="skill-icon-wrap" style="--clr:#3776ab;"><i class="fab fa-python"></i></div><div class="skill-info"><h4>Python</h4><p>Scripting &amp; Logic</p></div><div class="skill-level"><div class="skill-bar"><div class="skill-fill" style="width:72%;--clr:#3776ab;"></div></div><span>72%</span></div></div><div class="skill-glow" style="--clr:#3776ab20;"></div></div>
+    <div class="skill-card"><div class="skill-card-inner"><div class="skill-icon-wrap" style="--clr:#00599C;"><i class="fas fa-code"></i></div><div class="skill-info"><h4>C Programming</h4><p>Core Fundamentals</p></div><div class="skill-level"><div class="skill-bar"><div class="skill-fill" style="width:78%;--clr:#00599C;"></div></div><span>78%</span></div></div><div class="skill-glow" style="--clr:#00599C20;"></div></div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="projects-full section-to-animate">
+  <span class="section-tag">MY WORK</span>
+  <h2>Projects</h2>
+  <div class="projects-grid-full">
+    <div class="pf-card">
+      <div class="pf-banner pf-banner-1">
+        <div class="pf-banner-ill">
+          <div class="pf-chain-nodes">
+            <div class="pf-node pn1"><i class="fas fa-microchip"></i></div>
+            <div class="pf-connector"></div>
+            <div class="pf-node pn2"><i class="fas fa-link"></i></div>
+            <div class="pf-connector"></div>
+            <div class="pf-node pn3"><i class="fas fa-shield-alt"></i></div>
+          </div>
+          <div class="pf-orbit"><div class="pf-orbit-dot od1"></div><div class="pf-orbit-dot od2"></div></div>
+        </div>
+        <div class="pf-badge">⭐ Latest</div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-tags"><span class="pf-tag t-blue">Blockchain</span><span class="pf-tag t-purple">PQC</span><span class="pf-tag t-green">Federated Learning</span></div>
+        <h3>ChainFort</h3>
+        <p class="pf-full-title">Hybrid Blockchain-Orchestrated Firmware Validation and Secure Update Delivery Using PQC and Federated Trust Consensus</p>
+        <p class="pf-desc">A cutting-edge security framework combining blockchain immutability with Post-Quantum Cryptography to validate firmware integrity and deliver secure updates across distributed IoT networks.</p>
+        <div class="pf-meta"><span class="pf-date"><i class="fas fa-calendar-alt"></i> Dec 2025 – Mar 2026</span></div>
+      </div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-banner pf-banner-2">
+        <div class="pf-banner-ill">
+          <div class="pf-eye-scan">
+            <div class="pf-eye-frame"><div class="pf-scan-v"></div><div class="pf-scan-h"></div><div class="pf-eye-dot"></div></div>
+            <div class="pf-neural-lines"><div class="pf-nl nl1"></div><div class="pf-nl nl2"></div><div class="pf-nl nl3"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-tags"><span class="pf-tag t-red">Computer Vision</span><span class="pf-tag t-orange">Deep Learning</span><span class="pf-tag t-blue">CNN</span></div>
+        <h3>Weapon Detector</h3>
+        <p class="pf-full-title">Automated Weapon Detection Using Computer Vision &amp; Deep Learning</p>
+        <p class="pf-desc">Real-time weapon detection system using convolutional neural networks to identify and flag dangerous objects in surveillance footage with high accuracy.</p>
+        <div class="pf-meta"><span class="pf-date"><i class="fas fa-calendar-alt"></i> Feb 2025 – May 2025</span></div>
+      </div>
+    </div>
+    <div class="pf-card">
+      <div class="pf-banner pf-banner-3">
+        <div class="pf-banner-ill">
+          <div class="pf-road-scene">
+            <div class="pf-road-strip"></div>
+            <div class="pf-sign-group">
+              <div class="pf-sign-circle red-s">STOP</div>
+              <div class="pf-sign-circle blue-s">60</div>
+              <div class="pf-sign-tri">⚠</div>
+            </div>
+            <div class="pf-arrow-right"><i class="fas fa-arrow-right"></i></div>
+            <div class="pf-label-box">Classified ✓</div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-body">
+        <div class="pf-tags"><span class="pf-tag t-green">Neural Networks</span><span class="pf-tag t-purple">Image Classification</span><span class="pf-tag t-orange">AI</span></div>
+        <h3>Traffic Sign AI</h3>
+        <p class="pf-full-title">Traffic Sign Recognition and Classification Using Deep Learning Neural Networks</p>
+        <p class="pf-desc">An intelligent system that recognizes and classifies traffic signs from real-world images using deep learning, contributing to autonomous driving safety systems.</p>
+        <div class="pf-meta"><span class="pf-date"><i class="fas fa-calendar-alt"></i> Jan 2024 – Mar 2024</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact-new section-to-animate">
+  <h2>Get in Touch</h2>
+  <div class="contact-layout">
+    <div class="contact-icons-container">
+      <a href="mailto:parameswaricse123@gmail.com" class="social-icon"><i class="fas fa-envelope"></i><span>Email</span></a>
+      <a href="https://github.com/parameswari09" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-github"></i><span>GitHub</span></a>
+      <a href="https://www.linkedin.com/in/parameswari06/" target="_blank" rel="noopener noreferrer" class="social-icon"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+    </div>
+    <form class="contact-form-card" onsubmit="sendEmail(event)">
+      <input type="text" id="contact-name" placeholder="Your Name" required>
+      <input type="email" id="contact-email" placeholder="Your Email" required>
+      <textarea id="contact-message" placeholder="Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-left"><h3>Parameswari's Portfolio</h3><p>Thank you for visiting my personal portfolio website. Connect with me over socials.</p></div>
+    <div class="footer-center">
+      <h3>Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="#top">Home</a></li><li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li><li><a href="#education">Education</a></li>
+        <li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <h3>Contact Info</h3>
+      <p>Email: <a href="mailto:parameswaricse123@gmail.com">parameswaricse123@gmail.com</a></p>
+      <p>Thirukalukundram, Chengalpattu District - 603109</p>
+    </div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 S. Parameswari</p></div>
+</footer>
+
+<a href="#top" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+<script>
+  const navbar = document.querySelector('.navbar');
+  const backToTop = document.querySelector('.back-to-top');
+  const menuToggle = document.getElementById('mobile-menu');
+  const navLinks = document.getElementById('nav-links');
+
+  menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.querySelector('i').classList.toggle('fa-times');
+  });
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled');
+    if (window.scrollY > 300) backToTop.classList.add('active'); else backToTop.classList.remove('active');
+  });
+  document.querySelectorAll('nav a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('active')));
+
+  function sendEmail(e) {
+    e.preventDefault();
+    const name = document.getElementById('contact-name').value;
+    const email = document.getElementById('contact-email').value;
+    const message = document.getElementById('contact-message').value;
+    window.location.href = "mailto:parameswaricse123@gmail.com?subject=" + encodeURIComponent("Portfolio Contact: " + name) + "&body=" + encodeURIComponent("Name: " + name + "\nEmail: " + email + "\n\nMessage:\n" + message);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.section-to-animate').forEach(s => observer.observe(s));
+
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.querySelectorAll('.skill-fill').forEach(f => f.classList.add('animated')); });
+  }, { threshold: 0.2 });
+  const skillsSection = document.querySelector('.skills-new');
+  if (skillsSection) skillObserver.observe(skillsSection);
+</script>
+
+<script>
+  const text = ["Parameswari – Web Developer", "Backend Developer"];
+  let count = 0, index = 0;
+  function type() {
+    if (count === text.length) count = 0;
+    const currentText = text[count];
+    const letter = currentText.slice(0, ++index);
+    document.querySelector(".typing").textContent = letter;
+    if (letter.length === currentText.length) {
+      setTimeout(() => { index = 0; count++; document.querySelector(".typing").textContent = ""; type(); }, 2000);
+    } else { setTimeout(type, 150); }
+  }
+  type();
+</script>
+
+<script>
+  const osTitles = ["ChainFort — Blockchain · PQC", "Weapon Detector — CV · Deep Learning", "Traffic Sign AI — Neural Networks"];
+  let osIdx = 0;
+  const osTrack = document.getElementById('osTrack');
+  const osTitleText = document.getElementById('osTitleText');
+  const osCounter = document.getElementById('osCounter');
+  const osIndDots = document.querySelectorAll('.os-ind-dot');
+  const osProgressFills = document.querySelectorAll('.os-progress-fill');
+  const OS_INTERVAL = 3500;
+  let osTimer;
+
+  function osGo(n) {
+    osIndDots[osIdx].classList.remove('active');
+    osIdx = ((n % 3) + 3) % 3;
+    osTrack.style.transform = `translateX(-${osIdx * 100}%)`;
+    osIndDots[osIdx].classList.add('active');
+    osTitleText.textContent = osTitles[osIdx];
+    osCounter.textContent = (osIdx + 1) + ' / 3';
+    osProgressFills.forEach(f => { f.style.width = '0%'; f.style.transition = 'none'; });
+    setTimeout(() => {
+      osProgressFills[osIdx].style.transition = `width ${OS_INTERVAL}ms linear`;
+      osProgressFills[osIdx].style.width = '100%';
+    }, 50);
+  }
+  function osChange(dir) { clearInterval(osTimer); osGo(osIdx + dir); osStartAuto(); }
+  function osStartAuto() { clearInterval(osTimer); osTimer = setInterval(() => osChange(1), OS_INTERVAL); }
+  osGo(0); osStartAuto();
+</script>
+</body>
+</html>
