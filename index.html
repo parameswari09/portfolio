@@ -11,20 +11,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    /* ====== OS WINDOW — Blue/White Theme Match ====== */
+    /* ====== OS WINDOW ====== */
     .os-window {
       background: #ffffff;
       border-radius: 16px;
-      box-shadow:
-        0 0 0 1px rgba(37,99,235,0.1),
-        0 24px 60px rgba(37,99,235,0.12),
-        0 8px 24px rgba(0,0,0,0.07);
+      box-shadow: 0 0 0 1px rgba(37,99,235,0.1), 0 24px 60px rgba(37,99,235,0.12), 0 8px 24px rgba(0,0,0,0.07);
       overflow: hidden;
       width: 100%;
       max-width: 520px;
       border: 1px solid #e2e8f0;
+      box-sizing: border-box;
     }
-
     .os-titlebar {
       background: #f8faff;
       padding: 11px 16px;
@@ -34,47 +31,36 @@
       border-bottom: 1px solid #e2e8f0;
       user-select: none;
     }
-
     .os-dots { display: flex; gap: 7px; }
     .os-dot { width: 11px; height: 11px; border-radius: 50%; cursor: pointer; transition: opacity 0.2s; }
     .os-dot:hover { opacity: 0.75; }
     .os-dot.red    { background: #ff5f57; }
     .os-dot.yellow { background: #febc2e; }
     .os-dot.green  { background: #28c840; }
-
     .os-title-text {
       flex: 1; text-align: center;
       font-size: 11.5px; font-weight: 600;
       color: #64748b; letter-spacing: 0.4px;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
     }
-
-    .os-slide-counter {
-      font-size: 11px; color: #94a3b8;
-      font-weight: 600; min-width: 32px; text-align: right;
-    }
-
+    .os-slide-counter { font-size: 11px; color: #94a3b8; font-weight: 600; min-width: 32px; text-align: right; }
     .os-viewport { overflow: hidden; position: relative; }
-    .os-track { display: flex; transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1); }
+    .os-track { display: flex; transition: transform 0.55s cubic-bezier(0.4,0,0.2,1); }
     .os-slide { min-width: 100%; display: flex; flex-direction: column; }
-
-    /* Banner — blue gradient family */
     .os-slide-banner {
       height: 185px; position: relative; overflow: hidden;
       display: flex; align-items: center; justify-content: center;
     }
-    .os-banner-1 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%); }
-    .os-banner-2 { background: linear-gradient(135deg, #1e40af 0%, #4f46e5 60%, #7c3aed 100%); }
-    .os-banner-3 { background: linear-gradient(135deg, #0369a1 0%, #0284c7 60%, #38bdf8 100%); }
-
+    .os-banner-1 { background: linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%); }
+    .os-banner-2 { background: linear-gradient(135deg,#1e40af 0%,#4f46e5 60%,#7c3aed 100%); }
+    .os-banner-3 { background: linear-gradient(135deg,#0369a1 0%,#0284c7 60%,#38bdf8 100%); }
     .os-progress-bar { height: 3px; background: #e2e8f0; position: relative; overflow: hidden; }
     .os-progress-fill {
       position: absolute; top: 0; left: 0; height: 100%;
-      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      background: linear-gradient(90deg,#2563eb,#60a5fa);
       transition: width 0.1s linear; border-radius: 0 2px 2px 0;
     }
-
     .os-slide-body { padding: 18px 22px 20px; background: #ffffff; }
-
     .os-slide-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
     .os-tag { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; letter-spacing: 0.3px; }
     .os-tag.t-blue   { background: #dbeafe; color: #1d4ed8; border: 1px solid #bfdbfe; }
@@ -82,17 +68,14 @@
     .os-tag.t-green  { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
     .os-tag.t-red    { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
     .os-tag.t-orange { background: #fff7ed; color: #c2410c; border: 1px solid #fed7aa; }
-
     .os-slide-title { font-size: 17px; font-weight: 700; color: #0f172a; margin-bottom: 5px; }
     .os-slide-desc { font-size: 12.5px; color: #475569; line-height: 1.65; margin-bottom: 12px; }
-
     .os-slide-footer {
       display: flex; align-items: center; justify-content: space-between;
       padding-top: 12px; border-top: 1px solid #f1f5f9;
     }
     .os-date { font-size: 11px; color: #94a3b8; display: flex; align-items: center; gap: 5px; }
     .os-badge { background: #dbeafe; border: 1px solid #bfdbfe; color: #1d4ed8; padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; }
-
     .os-nav {
       display: flex; gap: 8px; align-items: center;
       padding: 10px 16px; background: #f8faff;
@@ -106,12 +89,11 @@
       transition: all 0.2s ease;
     }
     .os-arrow:hover { background: #2563eb; border-color: #2563eb; color: white; }
-
     .os-indicator-dots { display: flex; gap: 6px; }
     .os-ind-dot { width: 6px; height: 6px; border-radius: 50%; background: #cbd5e1; cursor: pointer; transition: all 0.3s ease; }
     .os-ind-dot.active { background: #2563eb; width: 18px; border-radius: 3px; }
 
-    /* ===== ILLUSTRATION STYLES (white on blue banners) ===== */
+    /* ===== BANNER ILLUSTRATIONS ===== */
     .ill-grid {
       display: grid; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 1fr 1fr;
       gap: 5px; width: 110px; height: 70px; position: relative; z-index: 2;
@@ -124,11 +106,11 @@
     .ill-chain { display:flex; align-items:center; justify-content:center; color:#fff; font-size:16px; background:rgba(255,255,255,0.2); border-radius:6px; }
     .ill-shield { display:flex; align-items:center; justify-content:center; color:#bfdbfe; font-size:16px; background:rgba(255,255,255,0.15); border-radius:6px; }
 
-    .ill-weapon-wrap { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+    .ill-weapon-wrap { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
     .ill-camera-big { position:absolute; top:20px; left:30px; color:rgba(255,255,255,0.9); font-size:28px; }
     .ill-scan-h-big {
       position:absolute; left:0; right:0; height:2px;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.7), transparent);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.7),transparent);
       animation: scanBig 2.5s ease-in-out infinite;
     }
     @keyframes scanBig { 0%,100%{top:20%;opacity:0.9;} 50%{top:75%;} }
@@ -139,13 +121,13 @@
     .ill-cross { color:#fff; font-size:18px; position:relative; z-index:1; }
     .glow-orange { position:absolute; width:100px; height:100px; background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%); bottom:-20px; right:-20px; border-radius:50%; pointer-events:none; }
 
-    .ill-traffic-wrap { display:flex; align-items:center; gap:14px; position:relative; z-index:2; padding:0 16px; }
-    .ill-sign-group-big { display:flex; gap:10px; align-items:center; }
-    .ill-sign-circle-big { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+    .ill-traffic-wrap { display:flex; align-items:center; gap:10px; position:relative; z-index:2; padding:0 12px; flex-wrap:nowrap; overflow:hidden; justify-content:center; }
+    .ill-sign-group-big { display:flex; gap:8px; align-items:center; }
+    .ill-sign-circle-big { width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:800; color:white; box-shadow:0 4px 12px rgba(0,0,0,0.2); }
     .red-big { background:#ef4444; }
     .blue-big { background:rgba(255,255,255,0.25); border:2px solid rgba(255,255,255,0.5); border-radius:10px; }
-    .tri-big { width:48px; height:48px; background:#fde68a; clip-path:polygon(50% 0%,0% 100%,100% 100%); display:flex; align-items:center; justify-content:center; font-size:20px; }
-    .ill-classified { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:5px 12px; border-radius:10px; font-size:11px; font-weight:700; white-space:nowrap; }
+    .tri-big { width:44px; height:44px; background:#fde68a; clip-path:polygon(50% 0%,0% 100%,100% 100%); display:flex; align-items:center; justify-content:center; font-size:18px; }
+    .ill-classified { background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:4px 10px; border-radius:10px; font-size:10px; font-weight:700; white-space:nowrap; }
     .glow-green { position:absolute; width:100px; height:100px; background:radial-gradient(circle,rgba(255,255,255,0.12),transparent 70%); top:-20px; left:-20px; border-radius:50%; pointer-events:none; }
 
     .pf-orbit-big { position:absolute; width:160px; height:160px; border-radius:50%; border:1px dashed rgba(255,255,255,0.2); animation:spin 14s linear infinite; }
@@ -156,10 +138,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
     @keyframes arrowPulse { 0%,100% { transform: translateX(0); opacity: 0.4; } 50% { transform: translateX(5px); opacity: 0.8; } }
 
-    @media(max-width:900px) { .os-window { max-width: 100%; } }
-    .menu-toggle {
-  display: none;
-}
+    .menu-toggle { display: none; }
   </style>
 </head>
 <body id="top">
@@ -207,7 +186,6 @@
 
       <div class="os-viewport">
         <div class="os-track" id="osTrack">
-
           <!-- Slide 1 -->
           <div class="os-slide">
             <div class="os-slide-banner os-banner-1">
@@ -279,7 +257,7 @@
                   <div class="ill-sign-circle-big blue-big">60</div>
                   <div class="tri-big">⚠</div>
                 </div>
-                <i class="fas fa-arrow-right" style="color:rgba(255,255,255,0.4);font-size:18px;animation:arrowPulse 1.5s ease-in-out infinite;"></i>
+                <i class="fas fa-arrow-right" style="color:rgba(255,255,255,0.4);font-size:16px;animation:arrowPulse 1.5s ease-in-out infinite;flex-shrink:0;"></i>
                 <div class="ill-classified">Classified ✓</div>
               </div>
             </div>
@@ -297,7 +275,6 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -441,7 +418,6 @@
       <div class="pf-banner pf-banner-3">
         <div class="pf-banner-ill">
           <div class="pf-road-scene">
-            <div class="pf-road-strip"></div>
             <div class="pf-sign-group">
               <div class="pf-sign-circle red-s">STOP</div>
               <div class="pf-sign-circle blue-s">60</div>
